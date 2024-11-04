@@ -3,7 +3,7 @@ from app.service.hospital_review_service import summarize_hospital_review
 
 hospital_review_bp = Blueprint('hospital_review', __name__)
 
-@hospital_review_bp.route('/api/summarize_review', methods=['POST'])
+@hospital_review_bp.route('/api/summarize-review', methods=['POST'])
 def summarize_review():
     data = request.get_json()
     query = data.get("query", "")
