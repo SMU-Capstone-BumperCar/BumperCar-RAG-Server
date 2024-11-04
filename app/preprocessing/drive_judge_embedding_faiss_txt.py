@@ -1,10 +1,11 @@
 import os
-import sys
 import re
+import sys
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import FAISS
 from langchain_upstage import UpstageEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # config 파일 경로 추가
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -21,7 +22,7 @@ text = documents[0].page_content  # documents 리스트에서 텍스트 추출
 # 패턴을 사용하여 대분류 청크 단위로 분할
 large_chunks = [match[0] if isinstance(match, tuple) else match for match in re.findall(pattern, text, re.DOTALL)]
 
-# RecursiveCharacterTextSplitter를 통해 추가 청킹 설정
+# 청킹 설정
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=3000,
     chunk_overlap=100,
